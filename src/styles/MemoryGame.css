@@ -1,0 +1,782 @@
+
+/* =========================================
+   MEMORY PAGE
+========================================= */
+
+.memory-page {
+  position: relative;
+
+  min-height: 100vh;
+
+  padding: 30px 20px;
+
+  display: flex;
+  justify-content: center;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(91, 70, 220, 0.18),
+      transparent 35%
+    ),
+    linear-gradient(
+      135deg,
+      #080d25 0%,
+      #0c1232 55%,
+      #101644 100%
+    );
+
+  color: #ffffff;
+}
+
+
+/* =========================================
+   CONTAINER
+========================================= */
+
+.memory-container {
+  position: relative;
+
+  z-index: 2;
+
+  width: 100%;
+  max-width: 850px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.memory-header {
+  width: 100%;
+  max-width: 650px;
+
+  text-align: center;
+}
+
+
+/* =========================================
+   LABEL
+========================================= */
+
+.memory-label {
+  display: inline-flex;
+
+  align-items: center;
+  gap: 9px;
+
+  padding: 9px 17px;
+
+  border-radius: 30px;
+
+  background: rgba(94, 71, 220, 0.12);
+
+  border: 1px solid rgba(132, 102, 255, 0.2);
+
+  color: #aa9aff;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  letter-spacing: 2px;
+}
+
+
+.memory-label-dot {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #9b70ff;
+
+  box-shadow:
+    0 0 12px #9b70ff;
+}
+
+
+/* =========================================
+   TITLE
+========================================= */
+
+.memory-header h1 {
+  margin-top: 18px;
+
+  font-size: 42px;
+
+  line-height: 1.1;
+
+  font-weight: 800;
+
+  letter-spacing: -2px;
+}
+
+
+.memory-header h1 span {
+  background: linear-gradient(
+    90deg,
+    #b44dff,
+    #805eff,
+    #4d91ff
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+/* =========================================
+   DESCRIPTION
+========================================= */
+
+.memory-header p {
+  display: none;
+  max-width: 600px;
+
+  margin: 15px auto 0;
+
+  color: #a9b2d3;
+
+  font-size: 16px;
+
+  line-height: 1.6;
+}
+
+
+/* =========================================
+   STATS
+========================================= */
+
+.memory-stats {
+  width: 100%;
+
+  max-width: 600px;
+
+  margin-top: 25px;
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 15px;
+}
+
+
+.stat {
+  min-height: 80px;
+
+  padding: 18px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 16px;
+
+  background: rgba(18, 27, 68, 0.72);
+
+  border: 1px solid rgba(103, 122, 210, 0.2);
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+
+.stat span {
+  color: #7f89ad;
+
+  font-size: 12px;
+
+  font-weight: 500;
+}
+
+
+.stat strong {
+  margin-top: 6px;
+
+  color: #ffffff;
+
+  font-size: 22px;
+
+  font-weight: 700;
+}
+
+
+/* =========================================
+   MEMORY BOARD
+========================================= */
+
+.memory-board {
+  width: 100%;
+
+  max-width: 600px;
+
+  margin-top: 30px;
+
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 15px;
+}
+
+
+/* =========================================
+   MEMORY CARD
+========================================= */
+
+.memory-card {
+  position: relative;
+
+  width: 100%;
+
+  aspect-ratio: 1;
+
+  padding: 0;
+
+  border: none;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  perspective: 1000px;
+}
+
+
+/* =========================================
+   CARD INNER
+========================================= */
+
+.card-inner {
+  position: relative;
+
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  transform-style: preserve-3d;
+
+  transition:
+    transform 0.5s ease;
+}
+
+
+.memory-card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+
+/* =========================================
+   CARD FRONT & BACK
+========================================= */
+
+.card-front,
+.card-back {
+  position: absolute;
+
+  inset: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 18px;
+
+  backface-visibility: hidden;
+
+  -webkit-backface-visibility: hidden;
+
+  border: 1px solid rgba(103, 122, 210, 0.25);
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+
+/* =========================================
+   CARD FRONT
+========================================= */
+
+.card-front {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(25, 35, 85, 0.95),
+      rgba(16, 24, 63, 0.95)
+    );
+
+  color: #7180b5;
+
+  font-size: 30px;
+
+  font-weight: 700;
+
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+.memory-card:hover .card-front {
+  border-color: rgba(125, 102, 255, 0.65);
+
+  box-shadow:
+    0 15px 35px rgba(70, 80, 180, 0.25);
+}
+
+
+/* =========================================
+   CARD BACK
+========================================= */
+
+.card-back {
+  transform: rotateY(180deg);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(91, 70, 220, 0.35),
+      rgba(70, 108, 255, 0.2)
+    );
+
+  border-color: rgba(137, 111, 255, 0.55);
+
+  font-size: 38px;
+
+  box-shadow:
+    0 15px 40px rgba(80, 70, 200, 0.25);
+}
+
+
+/* =========================================
+   PREVIEW MESSAGE
+========================================= */
+
+.preview-message {
+  margin-top: 22px;
+
+  color: #8f9bc4;
+
+  font-size: 13px;
+
+  animation: previewPulse 1s ease-in-out infinite;
+}
+
+
+@keyframes previewPulse {
+
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+}
+
+
+/* =========================================
+   RESULT
+========================================= */
+
+.memory-result {
+  width: 100%;
+
+  max-width: 600px;
+
+  margin-top: 30px;
+
+  padding: 45px 30px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  text-align: center;
+
+  border: 1px solid rgba(125, 102, 255, 0.3);
+
+  border-radius: 25px;
+
+  background: rgba(18, 27, 68, 0.8);
+
+  box-shadow:
+    0 25px 70px rgba(0, 0, 0, 0.25);
+
+  animation: resultAppear 0.5s ease;
+}
+
+
+@keyframes resultAppear {
+
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+}
+
+
+/* =========================================
+   RESULT ICON
+========================================= */
+
+.result-icon {
+  width: 85px;
+  height: 85px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: rgba(125, 102, 255, 0.15);
+
+  font-size: 45px;
+
+  box-shadow:
+    0 0 35px rgba(125, 102, 255, 0.25);
+}
+
+
+/* =========================================
+   RESULT TITLE
+========================================= */
+
+.memory-result h2 {
+  margin-top: 22px;
+
+  font-size: 36px;
+
+  font-weight: 800;
+}
+
+
+.memory-result > p {
+  margin-top: 10px;
+
+  color: #9fa9cc;
+
+  font-size: 15px;
+
+  line-height: 1.6;
+}
+
+
+/* =========================================
+   RESULT STATS
+========================================= */
+
+.result-stats {
+  width: 100%;
+
+  margin-top: 30px;
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 12px;
+}
+
+
+.result-stats div {
+  padding: 15px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  border-radius: 14px;
+
+  background: rgba(8, 13, 37, 0.5);
+
+  border: 1px solid rgba(103, 122, 210, 0.12);
+}
+
+
+.result-stats span {
+  color: #7f89ad;
+
+  font-size: 11px;
+}
+
+
+.result-stats strong {
+  margin-top: 5px;
+
+  color: #ffffff;
+
+  font-size: 21px;
+}
+
+
+/* =========================================
+   PLAY AGAIN
+========================================= */
+
+.restart-button {
+  margin-top: 30px;
+
+  padding: 13px 25px;
+
+  border: none;
+
+  border-radius: 30px;
+
+  background:
+    linear-gradient(
+      100deg,
+      #496eff,
+      #984fe9
+    );
+
+  color: #ffffff;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 10px 25px rgba(76, 80, 230, 0.25);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+.restart-button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 14px 30px rgba(76, 80, 230, 0.4);
+}
+
+
+/* =========================================
+   NEW GAME
+========================================= */
+
+.restart-small {
+  margin-top: 25px;
+
+  padding: 10px 20px;
+
+  border-radius: 25px;
+
+  background: transparent;
+
+  border: 1px solid rgba(110, 125, 190, 0.3);
+
+  color: #8995be;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+
+.restart-small:hover {
+  color: #ffffff;
+
+  border-color: rgba(125, 102, 255, 0.6);
+
+  transform: translateY(-2px);
+}
+
+@media (max-width: 1000px){
+  .memory-header p{
+    display: block;
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+  .memory-page {
+    padding: 50px 15px;
+  }
+
+
+  .memory-header h1 {
+    font-size: 40px;
+  }
+
+
+  .memory-header p {
+    font-size: 14px;
+  }
+
+
+  .memory-stats {
+    margin-top: 35px;
+    gap: 8px;
+  }
+
+
+  .stat {
+    min-height: 70px;
+
+    padding: 14px 8px;
+  }
+
+
+  .stat strong {
+    font-size: 18px;
+  }
+
+
+  .memory-board {
+    gap: 10px;
+  }
+
+
+  .card-front,
+  .card-back {
+    border-radius: 13px;
+  }
+
+
+  .card-front {
+    font-size: 25px;
+  }
+
+
+  .card-back {
+    font-size: 30px;
+  }
+
+
+  .memory-result {
+    padding: 35px 20px;
+  }
+
+
+  .memory-result h2 {
+    font-size: 30px;
+  }
+
+
+  .result-stats {
+    gap: 7px;
+  }
+
+
+  .result-stats div {
+    padding: 12px 5px;
+  }
+
+
+  .result-stats strong {
+    font-size: 18px;
+  }
+
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 400px) {
+
+  .memory-page {
+    padding: 40px 12px;
+  }
+
+
+  .memory-label {
+    font-size: 10px;
+
+    letter-spacing: 1.5px;
+  }
+
+
+  .memory-header h1 {
+    font-size: 34px;
+  }
+
+  
+
+
+  .memory-board {
+    gap: 8px;
+  }
+
+
+  .card-front {
+    font-size: 22px;
+  }
+
+
+  .card-back {
+    font-size: 26px;
+  }
+
+}
+/* =========================================
+   LOSE RESULT
+========================================= */
+
+.lose-result {
+  border-color: rgba(255, 100, 100, 0.3);
+}
+
+.lose-result .result-icon {
+  filter: grayscale(0.1);
+}
+
+.lose-result h2 {
+  color: #ff8b8b;
+}
+
+.lose-result .restart-button {
+  background: linear-gradient(
+    100deg,
+    #ff5f6d,
+    #c94bff
+  );
+}
